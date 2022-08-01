@@ -15,11 +15,17 @@ public class Board {
     }
     //Retorna a matriz de peças na linha e coluna
     public Piece piece(int row, int column) {
+        if (!positionExists(row, column)) {
+            throw new BoardException("Position not on the board");
+        }
         return pieces[row][column];
     }
 
     //Sobrecarga do metodo anterior, retornando a posicao
     public Piece piece(Position position) {
+        if (!positionExists(position)) {
+            throw new BoardException("Position not on the board");
+        }
         return pieces[position.getRow()][position.getColumn()];
     }
 
@@ -34,9 +40,6 @@ public class Board {
 
     //verifica se a posicao ta dentro do tabuleiro dado uma linha e uma coluna
     private boolean positionExists(int row, int column) {
-        if (!positionExists(row, column)) {
-            throw new BoardException("Position not on the board");
-        }
         /*
             rows = altura do tabuleiro
             columns = quantidade de colunas do tabuleiro
@@ -45,9 +48,6 @@ public class Board {
     }
 
     public boolean positionExists(Position position) {
-        if (!positionExists(position)) {
-            throw new BoardException("Position not on the board");
-        }
         return positionExists(position.getRow(), position.getColumn());
     }
 
